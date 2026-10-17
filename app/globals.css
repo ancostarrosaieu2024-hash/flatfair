@@ -137,3 +137,7 @@ a { color: var(--primary); }
 @media (max-width: 520px) {
   .inline-form { flex-direction: column; align-items: stretch; }
 }
+
+/* Shown only if the page's JavaScript never starts (e.g. a very old browser). */
+.js-warning { visibility: hidden; margin-bottom: 14px; animation: reveal 0s 4s forwards; }
+@keyframes reveal { to { visibility: visible; } }

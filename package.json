@@ -12,5 +12,12 @@
     "next": "16.4.2",
     "react": "19.3.1",
     "react-dom": "19.3.1"
-  }
+  },
+  "browserslist": [
+    "chrome >= 100",
+    "edge >= 100",
+    "firefox >= 100",
+    "safari >= 15",
+    "ios_saf >= 15"
+  ]
 }
