@@ -8,9 +8,13 @@ import { supabase } from "@/lib/supabase";
 export default function Header() {
   const router = useRouter();
   const [session, setSession] = useState(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data }) => setSession(data.session));
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setReady(true);
+    });
     const { data } = supabase.auth.onAuthStateChange((_event, s) => setSession(s));
     return () => data.subscription.unsubscribe();
   }, []);
@@ -26,7 +30,7 @@ export default function Header() {
         FlatFair
       </Link>
       <nav className="nav">
-        {session ? (
+        {!ready ? null : session ? (
           <>
             <Link href="/app">My flat</Link>
             <button data-testid="logout" className="btn btn-ghost" onClick={logout}>
@@ -34,12 +38,7 @@ export default function Header() {
             </button>
           </>
         ) : (
-          <>
-            <Link href="/login">Log in</Link>
-            <Link href="/signup" className="btn btn-small">
-              Sign up
-            </Link>
-          </>
+          <Link href="/login">Log in</Link>
         )}
       </nav>
     </header>
